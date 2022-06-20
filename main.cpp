@@ -8,15 +8,11 @@ using namespace std;
 
 // VOID FUNCTIONS
 void playCaro();
-void mainGame();
 void gotoMenu(char choice);
 void exitMenu();
 void pcTurn();
-void upKey();
-void downKey();
-void leftKey();
-void rightKey();
-void checkGame();
+int checkGame();
+int checkWin();
 void pauseGame();
 void setPuzzle();
 void trollStatus();
@@ -26,12 +22,15 @@ void helpCaro(string located);
 void hideCursor(bool condition);
 
 //GLOBAL VARIABLE
-
 int correct = 0;
-int userPointer = 0;
-int pcPointer = 0;
+int userPoint = 0;
+int pcPoint = 0;
+int coroPointer = 0;
+int roundPuzzle = 0;
 string caroStatus;
+int caroPuzzle[3][3] = {-1};
 
+//MAIN FUNCTION
 int main(){
 	//HIDE CURSOR
 	hideCursor(true);
@@ -79,18 +78,105 @@ int main(){
 	return 0;
 }
 
-void checkGame(){
+int checkGame(){
+	// CHECK ROW
+	for(int i = 0; i < 3; ++i){ 
+		if(caroPuzzle[i][0] == caroPuzzle[i][1]
+		|| caroPuzzle[i][1] == caroPuzzle[i][2]){
+			return caroPuzzle[i][0];
+		}
+	}
+	// CHECK COLUMN
+	for(int i = 0; i < 3; ++i){ 
+		if(caroPuzzle[0][i] == caroPuzzle[1][i]
+		|| caroPuzzle[1][i] == caroPuzzle[2][i]){
+			return caroPuzzle[0][i];
+		}
+	}
+	// CHECK DIAGONAL
+	if(caroPuzzle[0][0] == caroPuzzle[1][1]
+	|| caroPuzzle[1][1] == caroPuzzle[2][2]){
+		return caroPuzzle[0][0];
+	}
 	
+	if(caroPuzzle[1][2] == caroPuzzle[2][2]
+	|| caroPuzzle[2][2] == caroPuzzle[2][1]){
+		return caroPuzzle[1][2];
+	}
+	return -1;
+}
+
+void setPuzzle(){
+	for(int i = 0; i < 3; ++i){
+		for(int j = 0; j < 3; ++j){
+			caroPuzzle[i][j] == 0;
+		}
+	}
+}
+
+int checkWin(){
+	if(checkGame() != 1){
+		if(checkGame() == 0){
+			userPoint++;
+		}else{
+			pcPoint++;
+		}
+		setPuzzle();
+		playCaro();
+	}
+	return -1;
 }
 
 void playCaro(){
-	//CONDITION
+	//HEADER
+	system("cls");
+	colorSet(4);
+		gamePart("line_small_left");
+	colorSet(15);
+		cout << "CARO GAME";
+	colorSet(4);
+		gamePart("line_small_right");
+		
+	// CHECK PLAYER CONDITION
+	colorSet(4);
+		gamePart("space");
+		gamePart("caro_outer_border");
+		gamePart("space");
+		gamePart("caro_inner_vertical_border_small");
+	colorSet(11);
+		cout << setw(2) << "USER: " << setw(2) << userPoint << "       ";
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_next_line");
+	colorSet(4);
+		gamePart("space");
+		gamePart("caro_inner_vertical_border_small");
+	colorSet(14);
+		cout << setw(2) << "BOT: " << setw(3) << pcPoint << "       ";
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_next_line");
+		gamePart("space");
+		gamePart("caro_outer_border");
+	colorSet(4);
+		gamePart("space");
+		gamePart("caro_inner_vertical_border_small");
+	colorSet(10);
+		cout << setw(2) << "ROUND: " << setw(2) << roundPuzzle << "      ";
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_next_line");
+		gamePart("space");
+		gamePart("caro_outer_border");
+	colorSet(4);
+		cout << endl << endl << endl;
+		gamePart("space");
+		gamePart("caro_outer_border");
+		gamePart("space");
+		gamePart("caro_inner_vertical_border_small");
 	
 }
 
 void gotoMenu(char choice){
 	if(choice == '1'){
-//		playCaro();
+		playCaro();
 	}else if(choice == '2'){
 		helpCaro("main");
 	}else if(choice == '3'){
@@ -137,15 +223,6 @@ void exitMenu(){
 			}
 		}
 	}while(true);
-}
-
-void setPuzzle(){
-	string dot = ".";
-	string puzzle;
-	
-	puzzle = ("| . . |" + dot
-			 +"| . . |" + dot
-			 +"| . . |" + dot );
 }
 
 void pauseGame(){
@@ -265,6 +342,8 @@ void gamePart(string part){
 		cout << " |" << endl;
 	}else if(part == "sudoku_inner_border"){
 		cout << " +-----+-----+-----+" << endl;
+	}else if(part == "space"){
+		cout << "           ";
 	}else{
 		cout << "";
 	}
