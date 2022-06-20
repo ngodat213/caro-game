@@ -11,24 +11,26 @@ void playCaro();
 void mainGame();
 void gotoMenu(char choice);
 void exitMenu();
+void pcTurn();
 void upKey();
 void downKey();
 void leftKey();
 void rightKey();
 void checkGame();
-void pcTurn();
 void pauseGame();
+void setPuzzle();
 void trollStatus();
-void helpCaro(string located);
-void hideCursor(bool condition);
 void colorSet(int init);
 void gamePart(string part);
+void helpCaro(string located);
+void hideCursor(bool condition);
 
 //GLOBAL VARIABLE
-int correct = 0;
-int caroPointer = 0;
-string caroStatus;
 
+int correct = 0;
+int userPointer = 0;
+int pcPointer = 0;
+string caroStatus;
 
 int main(){
 	//HIDE CURSOR
@@ -135,6 +137,15 @@ void exitMenu(){
 			}
 		}
 	}while(true);
+}
+
+void setPuzzle(){
+	string dot = ".";
+	string puzzle;
+	
+	puzzle = ("| . . |" + dot
+			 +"| . . |" + dot
+			 +"| . . |" + dot );
 }
 
 void pauseGame(){
