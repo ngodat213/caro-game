@@ -8,6 +8,8 @@ using namespace std;
 
 // VOID FUNCTIONS
 void playCaro();
+void DrawScreen();
+void printValue(int i, int j);
 void gotoMenu(char choice);
 void exitMenu();
 void pcTurn();
@@ -28,7 +30,7 @@ int pcPoint = 0;
 int coroPointer = 0;
 int roundPuzzle = 0;
 string caroStatus;
-int caroPuzzle[3][3] = {-1};
+int caroPuzzle[3][3];
 
 //MAIN FUNCTION
 int main(){
@@ -63,7 +65,7 @@ int main(){
 		colorSet(7); // LIGHT GRAY
 			cout << " [Press the number of your choice]";
 		colorSet(15); // WHITE
-
+		
 			// GET USER CHOICE
 			char select = getch();
 			if(!(select < '1' || select > '3')){
@@ -106,14 +108,6 @@ int checkGame(){
 	return -1;
 }
 
-void setPuzzle(){
-	for(int i = 0; i < 3; ++i){
-		for(int j = 0; j < 3; ++j){
-			caroPuzzle[i][j] == 0;
-		}
-	}
-}
-
 int checkWin(){
 	if(checkGame() != 1){
 		if(checkGame() == 0){
@@ -127,7 +121,29 @@ int checkWin(){
 	return -1;
 }
 
+// RESET ALL VALUE CAROPUZZLE
+void setPuzzle(){
+	for(int i = 0; i < 3; ++i){
+		for(int j = 0; j < 3; ++j){
+			caroPuzzle[i][j] = -1;
+		}
+	}
+}
+
 void playCaro(){
+	for(int i = 0; i < 10; ++i){
+		if(i == 0 && checkGame() != -1){
+			
+		}
+		DrawScreen();
+		getch();
+		if(checkGame() != -1){
+			if(checkGame() == 1)
+		}
+	}	
+}
+
+void DrawScreen(){
 	//HEADER
 	system("cls");
 	colorSet(4);
@@ -165,17 +181,161 @@ void playCaro(){
 		gamePart("caro_inner_vertical_border_next_line");
 		gamePart("space");
 		gamePart("caro_outer_border");
+	// ROW 1
 	colorSet(4);
 		cout << endl << endl << endl;
 		gamePart("space");
 		gamePart("caro_outer_border");
 		gamePart("space");
 		gamePart("caro_inner_vertical_border_small");
-	
+		gamePart("space3");
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_small");
+		gamePart("space3");
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_small");
+		gamePart("space3");
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_next_line");
+	// -- PRINT VALUE CARO PUZZLE -- //
+	colorSet(4);
+		gamePart("space");
+		gamePart("caro_inner_vertical_border_small");
+	colorSet(10);
+		printValue(0,0);
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_small");
+	colorSet(10);
+		printValue(0,1);
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_small");
+	colorSet(10);
+		printValue(0,2);
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_next_line");
+	// -- PRINT VALUE CARO PUZZLE -- //
+	gamePart("space");
+		gamePart("caro_inner_vertical_border_small");
+		gamePart("space3");
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_small");
+		gamePart("space3");
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_small");
+		gamePart("space3");
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_next_line");
+	// ROW 2
+	colorSet(4);
+		gamePart("space");
+		gamePart("caro_outer_border");
+		gamePart("space");
+		gamePart("caro_inner_vertical_border_small");
+		gamePart("space3");
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_small");
+		gamePart("space3");
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_small");
+		gamePart("space3");
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_next_line");
+	// -- PRINT VALUE CARO PUZZLE -- //
+	colorSet(4);
+		gamePart("space");
+		gamePart("caro_inner_vertical_border_small");
+	colorSet(10);
+		printValue(1,0);
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_small");
+	colorSet(10);
+		printValue(1,1);
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_small");
+	colorSet(10);
+		printValue(1,2);
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_next_line");
+	// -- PRINT VALUE CARO PUZZLE -- //
+	gamePart("space");
+		gamePart("caro_inner_vertical_border_small");
+		gamePart("space3");
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_small");
+		gamePart("space3");
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_small");
+		gamePart("space3");
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_next_line");
+	//ROW 3
+	colorSet(4);
+		gamePart("space");
+		gamePart("caro_outer_border");
+		gamePart("space");
+		gamePart("caro_inner_vertical_border_small");
+		gamePart("space3");
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_small");
+		gamePart("space3");
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_small");
+		gamePart("space3");
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_next_line");
+	// -- PRINT VALUE CARO PUZZLE -- //
+	colorSet(4);
+		gamePart("space");
+		gamePart("caro_inner_vertical_border_small");
+	colorSet(10);
+		printValue(2,0);
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_small");
+	colorSet(10);
+		printValue(2,1);
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_small");
+	colorSet(10);
+		printValue(2,2);
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_next_line");
+	// -- PRINT VALUE CARO PUZZLE -- //
+	gamePart("space");
+		gamePart("caro_inner_vertical_border_small");
+		gamePart("space3");
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_small");
+		gamePart("space3");
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_small");
+		gamePart("space3");
+	colorSet(4);
+		gamePart("caro_inner_vertical_border_next_line");
+		gamePart("space");
+		gamePart("caro_outer_border");
+	colorSet(14);
+		cout << "[ Press [1-9] number of your choice! ]" << endl;
+		cout << " 1   2   3" << endl;
+		cout << " 4   5   6" << endl;
+		cout << " 7   8   9" << endl;
+}
+
+void printValue(int i, int j){
+	if(caroPuzzle[i][j] != -1){
+		if(caroPuzzle[i][j] == 1){
+			cout << " X ";	
+		}
+		else{
+			cout << " O ";
+		}
+	}else{
+		cout << "   ";
+	}
 }
 
 void gotoMenu(char choice){
 	if(choice == '1'){
+		setPuzzle();
 		playCaro();
 	}else if(choice == '2'){
 		helpCaro("main");
@@ -342,6 +502,8 @@ void gamePart(string part){
 		cout << " |" << endl;
 	}else if(part == "sudoku_inner_border"){
 		cout << " +-----+-----+-----+" << endl;
+	}else if(part == "space3"){
+		cout << "   ";
 	}else if(part == "space"){
 		cout << "           ";
 	}else{
